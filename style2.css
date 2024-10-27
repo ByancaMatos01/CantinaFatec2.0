@@ -1,0 +1,238 @@
+/* Arquivo style.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+}
+
+.menu{
+    width: 100%;
+    padding: 70px 0;
+}
+
+.menu h1{
+    font-size: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.menu h1 span{
+    color: #fa3131;
+    margin-left: 15px;
+    font-family: mv boli;
+}
+
+.menu h1 span::after{
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: #fa3131;
+    display: block;
+    position: relative;
+    bottom: 15px;
+}
+.menu .menu_box{
+    width: 95%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Mudei para usar repeat */
+    grid-gap: 15px;
+}
+.menu .menu_box .menu_card{
+    width: 325px;
+    height: 480px;
+    padding-top: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(255, 0, 55, 0.2);
+}
+
+.menu .menu_box .menu_card .menu_image{
+    width: 300px;
+    height: 245px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.menu .menu_box .menu_card .menu_image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: 0.3s;
+}
+
+.menu .menu_box .menu_card .menu_image:hover img{
+    transform: scale(1.1);
+}
+
+.menu .menu_box .menu_card .small_card{
+    width: 45px;
+    height: 45px;
+    float: right;
+    position: relative;
+    top: -240px;
+    right: -8px;
+    opacity: 0;
+    border-radius: 7px;
+    transition: 0.3s;
+}
+
+.menu .menu_box .menu_card:hover .small_card{
+    position: relative;
+    top: -240px;
+    right: 20px;
+    opacity: 1;
+}
+
+.menu .menu_box .menu_card .small_card i{
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 50px;
+    color: red;
+    cursor: pointer;
+    text-shadow: 0 0 6px #000;
+    transition: 0.2s;
+}
+
+.menu .menu_box .menu_card .small_card i:hover{
+    color: #fa3131;
+}
+
+.menu .menu_box .menu_card .menu_info h2{
+    width: 60%;
+    text-align: center;
+    margin: 10px auto 10px auto;
+    font-size: 25px;
+    color: #fa3131;
+}
+
+.menu .menu_box .menu_card .menu_info p{
+    text-align: center;
+    margin-top: 8px;
+    line-height: 21px;
+}
+
+.menu .menu_box .menu_card .menu_info h3{
+    text-align: center;
+    margin-top: 10px;
+}
+
+.menu .menu_box .menu_card .menu_info .menu_icon{
+    color: #fa3131;
+    text-align: center;
+    margin: 10px 0 10px 0;
+}
+
+.menu .menu_box .menu_card .menu_info .menu_btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: white;
+    background: green;
+    padding: 8px 10px;
+    margin: 0 80px;
+    transition: 0.3s;
+}
+
+.order {
+    max-width: 800px; /* Largura máxima do container */
+    margin: 50px auto; /* Centraliza horizontalmente */
+    padding: 20px;
+    background: #fff; /* Fundo branco */
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Estilo do título */
+.order h1 {
+    text-align: center;
+    font-size: 2.5em;
+    color: #fa3131; /* Cor do título */
+    margin-bottom: 20px; /* Espaçamento abaixo do título */
+}
+
+/* Estilo para a imagem do pedido */
+.order_image {
+    text-align: center; /* Centraliza a imagem */
+    margin-bottom: 20px; /* Espaçamento abaixo da imagem */
+}
+
+.order_image img {
+    max-width: 100%; /* Imagem responsiva */
+    height: auto; /* Mantém a proporção */
+}
+
+/* Estilo do formulário */
+form {
+    display: flex;
+    flex-direction: column; /* Organiza os campos verticalmente */
+}
+
+/* Estilo dos campos de entrada */
+.input {
+    margin-bottom: 15px; /* Espaçamento entre os campos */
+}
+
+.input label {
+    display: block; /* Faz o label ocupar toda a largura */
+    margin-bottom: 5px; /* Espaçamento abaixo do label */
+    font-weight: bold; /* Destaca o label */
+}
+
+.input input,
+.input select {
+    width: 100%; /* Campo ocupa toda a largura */
+    padding: 10px; /* Espaçamento interno */
+    border: 1px solid #ccc; /* Borda padrão */
+    border-radius: 5px; /* Bordas arredondadas */
+    font-size: 1em; /* Tamanho da fonte */
+    transition: border 0.3s; /* Transição na borda */
+}
+
+.input input:focus,
+.input select:focus {
+    border-color: #fa3131; /* Borda colorida ao focar */
+    outline: none; /* Remove contorno padrão */
+}
+
+/* Estilo do botão de envio */
+.submit-button {
+    background-color: #fa3131; /* Cor de fundo do botão */
+    color: white; /* Cor do texto */
+    padding: 10px; /* Espaçamento interno */
+    border: none; /* Remove borda padrão */
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer; /* Cursor de mão ao passar */
+    font-size: 1.2em; /* Tamanho da fonte */
+    transition: background 0.3s; /* Transição na cor de fundo */
+}
+
+.submit-button:hover {
+    background-color: #e02828; /* Cor mais escura ao passar o mouse */
+}
+
+/* Estilo para total do pedido */
+#total-valor {
+    font-weight: bold; /* Destaque para o valor total */
+}
+
+/* Estilo para campos de pagamento */
+#pix-field,
+#cartao-field {
+    margin-top: 10px; /* Espaçamento acima dos campos de pagamento */
+    padding: 10px;
+    border: 1px dashed #ccc; /* Borda pontilhada */
+    border-radius: 5px; /* Bordas arredondadas */
+    background: #f1f1f1; /* Fundo suave */
+}

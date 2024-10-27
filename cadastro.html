@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro Rápido</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.0/qrious.min.js"></script> <!-- Biblioteca para gerar QR Code -->
+</head>
+<body>
+
+<div class="order" id="Order">
+    <h1><span>Cadastro</span> Rápido</h1>
+
+    <div class="order_main">
+        <div class="order_image">
+            <img src="image/order_image.png" alt="Imagem de Cadastro">
+        </div>
+
+        <form id="cadastro-form" onsubmit="return handleSubmit(event)">
+            <div class="input">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" placeholder="Seu nome" required>
+            </div>
+
+            <div class="input">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Seu email" required>
+            </div>
+
+            <div class="input">
+                <label for="numero">Número</label>
+                <input type="tel" id="numero" placeholder="Seu número" required>
+            </div>
+
+            <div class="input">
+                <label for="hora">Hora</label>
+                <input type="time" id="hora" placeholder="Horário do pedido" required>
+            </div>
+
+            <div class="input">
+                <p>Total do Pedido: R$ <span id="total-valor">0.00</span></p>
+            </div>
+
+            <div class="input">
+                <label>Forma de Pagamento</label>
+                <select id="pagamento" required onchange="togglePaymentFields()">
+                    <option value="" disabled selected>Selecione uma opção</option>
+                    <option value="pix">Pix</option>
+                    <option value="boleto">Boleto</option>
+                    <option value="cartao">Cartão de Crédito</option>
+                    <option value="dinheiro">Dinheiro</option>
+                </select>
+            </div>
+
+            <!-- Campos de pagamento -->
+            <div id="pix-field" class="input" style="display: none;">
+                <p>QR Code para pagamento:</p>
+                <canvas id="pix-qr-code"></canvas>
+            </div>
+
+            <div id="cartao-field" class="input" style="display: none;">
+                <label for="numero-cartao">Número do Cartão</label>
+                <input type="text" id="numero-cartao" placeholder="Número do Cartão" required>
+                <label for="data-validade">Data de Validade</label>
+                <input type="text" id="data-validade" placeholder="MM/AA" required>
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" placeholder="CVV" required>
+            </div>
+
+            <button class="submit-button" type="submit">Finalizar Cadastro</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Recupera o valor total do pedido do localStorage e exibe na tela
+    const totalPedido = localStorage.getItem('totalPedido');
+    document.getElementById('total-valor').textContent = totalPedido ? parseFloat(totalPedido).toFixed(2) : '0.00';
+
+    // Função para mostrar/esconder campos de pagamento
+    function togglePaymentFields() {
+        const pagamento = document.getElementById('pagamento').value;
+        document.getElementById('pix-field').style.display = pagamento === 'pix' ? 'block' : 'none';
+        document.getElementById('cartao-field').style.display = pagamento === 'cartao' ? 'block' : 'none';
+    }
+
+    // Função de manipulação de envio do formulário
+    function handleSubmit(event) {
+        event.preventDefault();
+
+        // Obtém os dados do formulário
+        const nome = document.getElementById('nome').value;
+        const email = document.getElementById('email').value;
+        const numero = document.getElementById('numero').value;
+        const hora = document.getElementById('hora').value;
+        const pagamento = document.getElementById('pagamento').value;
+
+        if (pagamento === 'pix') {
+            // Gera o QR Code para o pagamento via Pix
+            const qrCode = new QRious({
+                element: document.getElementById('pix-qr-code'),
+                value: 'Seu valor Pix: R$ ' + totalPedido // Altere para o valor e informações do Pix
+            });
+        } else if (pagamento === 'dinheiro') {
+            // Redireciona para a cantina
+            window.location.href = 'cantina.html';
+            return; // Saia da função para não executar o alerta
+        }
+
+        // Alerta de confirmação com os dados do usuário
+        alert(`Cadastro finalizado com sucesso!\n\nNome: ${nome}\nEmail: ${email}\nNúmero: ${numero}\nHora: ${hora}\nPagamento: ${pagamento}`);
+
+        // Limpa o localStorage após o envio
+        localStorage.removeItem('totalPedido');
+
+        // Redireciona para outra página ou atualiza conforme necessário
+        window.location.href = 'confirmacao.html';
+    }
+</script>
+
+</body>
+</html>
+

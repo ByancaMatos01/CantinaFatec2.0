@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu de Reserva</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+<div class="menu" id="Menu">
+    <h1>Nosso <span>Cardápio</span></h1>
+    <div class="menu_box">
+        <!-- Item do menu: Burger -->
+        <div class="menu_card">
+            <div class="menu_image">
+                <img src="image/buger.jpg" alt="Burger">
+            </div>
+            <div class="small_card">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+            <div class="menu_info">
+                <h2>Burger</h2>
+                <h3>R$10.00</h3>
+                <p id="burger-qty">Quantidade: <span>10</span></p>
+                <div class="menu_icon">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+                <button onclick="reserveItem('burger')" id="burger-btn" class="menu_btn">Reserva</button>
+            </div>
+        </div>
+
+        <!-- Item do menu: Coxinha -->
+        <div class="menu_card">
+            <div class="menu_image">
+                <img src="image/pasta.jpg" alt="Coxinha">
+            </div>
+            <div class="small_card">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+            <div class="menu_info">
+                <h2>Coxinha</h2>
+                <h3>R$08.00</h3>
+                <p id="coxinha-qty">Quantidade: <span>5</span></p>
+                <div class="menu_icon">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+                <button onclick="reserveItem('coxinha')" id="coxinha-btn" class="menu_btn">Reserva</button>
+            </div>
+        </div>
+
+        <!-- Item do menu: Quibe -->
+        <div class="menu_card">
+            <div class="menu_image">
+                <img src="image/lasagna.webp" alt="Quibe">
+            </div>
+            <div class="small_card">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+            <div class="menu_info">
+                <h2>Quibe</h2>
+                <h3>R$08.00</h3>
+                <p id="quibe-qty">Quantidade: <span>16</span></p>
+                <div class="menu_icon">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+                <button onclick="reserveItem('quibe')" id="quibe-btn" class="menu_btn">Reserva</button>
+            </div>
+        </div>
+
+        <!-- Item do menu: Refrigerante -->
+        <div class="menu_card">
+            <div class="menu_image">
+                <img src="image/biryani.webp" alt="Refrigerante">
+            </div>
+            <div class="small_card">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+            <div class="menu_info">
+                <h2>Refrigerante</h2>
+                <h3>R$08.00</h3>
+                <p id="refri-qty">Quantidade: <span>30</span></p>
+                <div class="menu_icon">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+                <button onclick="reserveItem('refri')" id="refri-btn" class="menu_btn">Reserva</button>
+            </div>
+        </div>
+
+        <!-- Adicionando mais itens -->
+        <div class="menu_card">
+            <div class="menu_image">
+                <img src="image/cake.jpg" alt="Cake">
+            </div>
+            <div class="small_card">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+            <div class="menu_info">
+                <h2>Bolo</h2>
+                <h3>R$15.00</h3>
+                <p id="bolo-qty">Quantidade: <span>20</span></p>
+                <div class="menu_icon">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+                <button onclick="reserveItem('bolo')" id="bolo-btn" class="menu_btn">Reserva</button>
+            </div>
+        </div>
+
+        <div class="menu_card">
+            <div class="menu_image">
+                <img src="image/pizza.jpg" alt="Pizza">
+            </div>
+            <div class="small_card">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+            <div class="menu_info">
+                <h2>Pizza</h2>
+                <h3>R$30.00</h3>
+                <p id="pizza-qty">Quantidade: <span>15</span></p>
+                <div class="menu_icon">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+                <button onclick="reserveItem('pizza')" id="pizza-btn" class="menu_btn">Reserva</button>
+            </div>
+        </div>
+
+        <div class="menu_card">
+            <div class="menu_image">
+                <img src="image/ice_cream.jpg" alt="Sorvete">
+            </div>
+            <div class="small_card">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+            <div class="menu_info">
+                <h2>Sorvete</h2>
+                <h3>R$12.00</h3>
+                <p id="sorvete-qty">Quantidade: <span>25</span></p>
+                <div class="menu_icon">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+                <button onclick="reserveItem('sorvete')" id="sorvete-btn" class="menu_btn">Reserva</button>
+            </div>
+        </div>
+
+        <div class="menu_card">
+            <div class="menu_image">
+                <img src="image/Spanchi.jpg" alt="Bolo">
+            </div>
+            <div class="small_card">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+            <div class="menu_info">
+                <h2>cupcake</h2>
+                <h3>R$18.00</h3>
+                <p id="cupcake-qty">Quantidade: <span>03</span></p>
+                <div class="menu_icon">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+                <button onclick="reserveItem('cupcake')" id="cupcake-btn" class="menu_btn">Reserva</button>
+            </div>
+        </div>
+        
+    </div>
+</div>
+</body>
+</html>
+
