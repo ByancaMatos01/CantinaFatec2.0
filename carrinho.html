@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sua Reserva</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="cart.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="image/favicon" type="image/x-icon">
+</head>
+<body>
+    <section id="Cart">
+        <!--Header-->
+
+        <nav>
+            <div class="logo">
+                <img src="image/logo.png">
+            </div>
+
+            <ul>
+                <li><a href="index.html#Home">Início</a></li>
+                <li><a href="index.html#About">Sobre</a></li>
+                <li><a href="index.html#Menu">Cardápio</a></li>
+                <li><a href="index.html#Review">Clientes</a></li>
+                <li><a href="index.html#Order">Cadastro rápido</a></li>
+                <li><a href="reserva.html"> Reserva</a></li>
+            </ul>
+
+            <div class="icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <i class="fa-solid fa-heart"></i>
+                <a href="reserva.html"><i class="fa-solid fa-cart-shopping"></i></a>
+            </div>
+
+        </nav>
+
+        <!--Cart-->
+
+        <div class="main">
+            <table class="cart-table">
+                <thead class="cart-header">
+                    <tr>
+                        <th colspan="2">Item</th>
+                        <th>Preço</th>
+                        <th>Quantidade</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody class="cart-body">
+                    <tr>
+                        <td colspan="2">Chocolate</td>
+                        <td>$20.00</td>
+                        <td>
+                            <button class="icon-btn"><i class="fa-solid fa-minus"></i></button>
+                            1
+                            <button class="icon-btn"><i class="fa-solid fa-plus"></i></button>
+                        </td>
+                        <td>
+                            $20.00
+                            <button class="icon-btn"><i class="fa-solid fa-xmark"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Coca-Cola Zero</td>
+                        <td>$05.00</td>
+                        <td>
+                            <button class="icon-btn"><i class="fa-solid fa-minus"></i></button>
+                            1
+                            <button class="icon-btn"><i class="fa-solid fa-plus"></i></button>
+                        </td>
+                        <td>
+                            $05.00
+                            <button class="icon-btn"><i class="fa-solid fa-xmark"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Order Summary -->
+
+        <div class="main">
+            <div class="summary">
+                <div>
+                    <strong>Total: $25.00</strong>
+                </div>
+                <div>
+                    <span>Nome : <input type="text" placeholder="Nome" class="checkout-input"></span>
+                    <span>E-mail : <input type="text" placeholder="E-mail" class="checkout-input"> </span>
+                    <button class="checkout-btn">Reservar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
