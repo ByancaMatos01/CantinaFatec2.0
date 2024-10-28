@@ -93,6 +93,7 @@ function reserveItem(item) {
 }
 
 function renderCart() {
+  // Get elements from the cart page
   const cartBody = document.getElementById("cart-body");
   const cartTotal = document.getElementById("cart-total");
   const checkoutBtn = document.getElementById("checkout-btn");
@@ -102,6 +103,7 @@ function renderCart() {
   checkoutBtn.disabled = true;
 
   let currentCart = JSON.parse(localStorage.getItem("cart"));
+  // If no items are in the cart
   if (currentCart.length === 0) {
     cartBody.innerHTML = `
         <tr>
@@ -114,6 +116,7 @@ function renderCart() {
     return;
   }
 
+  // If there are items in the cart, load each one onto the table
   currentCart.forEach((item) => {
     const cartItem = document.createElement("tr");
     cartItem.innerHTML = `
@@ -135,6 +138,7 @@ function renderCart() {
   checkoutBtn.disabled = false;
 }
 
+// Execute script to load items into the cart if user is visiting the cart page
 if (window.location.pathname.includes("carrinho.html")) {
   renderCart();
 }
