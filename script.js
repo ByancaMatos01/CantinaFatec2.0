@@ -74,7 +74,8 @@ function reserveItem(item) {
       });
     }
 
-    console.log(cart);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    console.log(localStorage.getItem("cart"));
 
     // Pergunta ao usuário se deseja continuar reservando ou finalizar
     const continuar = confirm(
@@ -89,4 +90,51 @@ function reserveItem(item) {
   } else {
     alert(`Desculpe, ${item} está indisponível.`);
   }
+}
+
+function renderCart() {
+  const cartBody = document.getElementById("cart-body");
+  const cartTotal = document.getElementById("cart-total");
+  const checkoutBtn = document.getElementById("checkout-btn");
+
+  cartBody.innerHTML = "";
+  cartTotal.innerHTML = "";
+  checkoutBtn.disabled = true;
+
+  let currentCart = JSON.parse(localStorage.getItem("cart"));
+  if (currentCart.length === 0) {
+    cartBody.innerHTML = `
+        <tr>
+            <td colspan="2">Seu carrinho está vazio</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    `;
+    return;
+  }
+
+  currentCart.forEach((item) => {
+    const cartItem = document.createElement("tr");
+    cartItem.innerHTML = `
+      <td colspan="2">${item.name}</td>
+                        <td>$${itemPrices[item.id].toFixed(2)}</td>
+                        <td>
+                            <button class="icon-btn"><i class="fa-solid fa-minus"></i></button>
+                            ${item.quantity}
+                            <button class="icon-btn"><i class="fa-solid fa-plus"></i></button>
+                        </td>
+                        <td>
+                            $${item.price.toFixed(2)}
+                            <button class="icon-btn"><i class="fa-solid fa-xmark"></i></button>
+                        </td>
+    `;
+    cartBody.appendChild(cartItem);
+  });
+  cartTotal.innerHTML = `Total: $${localStorage.getItem("totalPedido")}`;
+  checkoutBtn.disabled = false;
+}
+
+if (window.location.pathname.includes("carrinho.html")) {
+  renderCart();
 }

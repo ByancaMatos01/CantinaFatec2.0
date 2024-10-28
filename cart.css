@@ -77,6 +77,10 @@
   background-color:#5c1111;
 }
 
+.checkout-btn:disabled {
+  background-color:gray;
+}
+
 .checkout-input {
   width: 300px;
   height: 25px;
