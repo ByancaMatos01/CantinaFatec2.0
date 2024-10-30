@@ -32,23 +32,45 @@ const ITEM_NAMES = {
   cupcake: "Cupcake",
 };
 
-let cart = [];
+const CART = [];
 
-// Inicialize o total do pedido com o valor armazenado no localStorage ou zero se não houver
-let totalPedido = parseFloat(localStorage.getItem("totalPedido")) || 0;
+const CART_TOTAL = 0;
+
+// Inicialize os valores iniciais em localStorage da primeira vez que o projeto é executado. Isso previne que os valores retornem ao default ao mudar de página
+function initializeValues() {
+  if (!localStorage.getItem("itemQuantities")) {
+    localStorage.setItem("itemQuantities", JSON.stringify(ITEM_QUANTITIES));
+    localStorage.setItem("cart", JSON.stringify(CART));
+    localStorage.setItem("cartTotal", CART_TOTAL);
+  }
+}
+
+initializeValues();
 
 function reserveItem(item) {
+  let currentItemQuantities = JSON.parse(
+    localStorage.getItem("itemQuantities")
+  );
+  let currentCart = JSON.parse(localStorage.getItem("cart"));
+  let currentCartTotal = parseFloat(localStorage.getItem("cartTotal"));
+
   // Verifica se o item ainda possui estoque
-  if (ITEM_QUANTITIES[item] > 0) {
+  if (currentItemQuantities[item] > 0) {
     // Diminui a quantidade em 1
-    ITEM_QUANTITIES[item]--;
+    currentItemQuantities[item]--;
+    // Atualie localStorage com o valor atual
+    localStorage.setItem(
+      "itemQuantities",
+      JSON.stringify(currentItemQuantities)
+    );
 
     // Atualiza a quantidade exibida
-    document.getElementById(`${item}-qty`).querySelector("span").textContent =
-      ITEM_QUANTITIES[item];
+    document.getElementById(
+      `${item}-qty`
+    ).textContent = `Quantidade: ${currentItemQuantities[item]}`;
 
     // Verifica se a quantidade chegou a zero para desabilitar o botão
-    if (ITEM_QUANTITIES[item] === 0) {
+    if (currentItemQuantities[item] === 0) {
       const button = document.getElementById(`${item}-btn`);
       button.disabled = true;
       button.textContent = "Indisponível";
@@ -57,16 +79,16 @@ function reserveItem(item) {
     }
 
     // Adiciona o preço do item ao total do pedido
-    totalPedido += ITEM_PRICES[item];
-    localStorage.setItem("totalPedido", totalPedido.toFixed(2)); // Armazena o total no localStorage
+    currentCartTotal += ITEM_PRICES[item];
+    localStorage.setItem("cartTotal", currentCartTotal.toFixed(2)); // Armazena o total no localStorage
 
     // Adicionar o item ao array de pedidos
-    let cartItem = cart.find((c) => c.id === item);
+    let cartItem = currentCart.find((c) => c.id === item);
     if (cartItem) {
       cartItem.quantity++;
       cartItem.price += ITEM_PRICES[item];
     } else {
-      cart.push({
+      currentCart.push({
         id: item,
         name: ITEM_NAMES[item],
         quantity: 1,
@@ -74,7 +96,7 @@ function reserveItem(item) {
       });
     }
 
-    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem("cart", JSON.stringify(currentCart));
 
     // Pergunta ao usuário se deseja continuar reservando ou finalizar
     const continuar = confirm(
@@ -137,7 +159,24 @@ function renderCart() {
   checkoutBtn.disabled = false;
 }
 
-// Execute script to load items into the cart if user is visiting the cart page
+function renderQuantities() {
+  let currentItemQuantities = JSON.parse(
+    localStorage.getItem("itemQuantities")
+  );
+
+  for (const [item, quantity] of Object.entries(currentItemQuantities)) {
+    document.getElementById(
+      `${item}-qty`
+    ).textContent = `Quantidade: ${quantity}`;
+  }
+}
+
+// Execute função para carregar as quantidades atuais se usuário estiver vendo a página de reserva
+if (window.location.pathname.includes("reserva.html")) {
+  renderQuantities();
+}
+
+// Execute função para carregar o carrinho se usuário estiver vendo a página de carrinho
 if (window.location.pathname.includes("carrinho.html")) {
   renderCart();
 }
