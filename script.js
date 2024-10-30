@@ -1,7 +1,7 @@
 // Definindo a quantidade e os preços dos itens
 const itemQuantities = {
     burger: 10,
-    coxinha: 5,
+    coxinha: 8,
     quibe: 16,
     refri: 30,
     bolo: 20,
@@ -11,14 +11,14 @@ const itemQuantities = {
 };
 
 const itemPrices = {
-    burger: 12,
-    coxinha: 6,
+    burger: 10,
+    coxinha: 8,
     quibe: 8,
-    refri: 10,
-    bolo: 18,
-    pizza: 20,
-    sorvete: 5,
-    cupcake: 8
+    refri: 8,
+    bolo: 15,
+    pizza: 30,
+    sorvete: 12,
+    cupcake: 18
 };
 
 // Inicialize o total do pedido com o valor armazenado no localStorage ou zero se não houver
