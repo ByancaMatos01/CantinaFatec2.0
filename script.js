@@ -108,6 +108,42 @@ function reserveItem(item) {
   }
 }
 
+function removeFromCart(item, quantity) {
+  let currentItemQuantities = JSON.parse(
+    sessionStorage.getItem("itemQuantities")
+  );
+  let currentCart = JSON.parse(sessionStorage.getItem("cart"));
+  let currentCartTotal = parseFloat(sessionStorage.getItem("cartTotal"));
+
+  // Retorna quantidade ao estoque
+  currentItemQuantities[item] += quantity;
+  // Atualie sessionStorage com o valor atual
+  sessionStorage.setItem(
+    "itemQuantities",
+    JSON.stringify(currentItemQuantities)
+  );
+
+  // Atualiza o preço do carrinho
+  currentCartTotal -= ITEM_PRICES[item] * quantity;
+  sessionStorage.setItem("cartTotal", currentCartTotal.toFixed(2)); // Armazena o total no sessionStorage
+
+  // Atualiza o carrinho
+  let cartItem = currentCart.find((c) => c.id === item);
+  if (quantity < cartItem.quantity) {
+    cartItem.quantity -= quantity;
+    cartItem.price -= ITEM_PRICES[item] * quantity;
+  } else {
+    currentCart = currentCart.filter((c) => c.id != item);
+  }
+
+  sessionStorage.setItem("cart", JSON.stringify(currentCart));
+
+  // Atualiza view do carrinho
+  if (window.location.pathname.includes("carrinho.html")) {
+    renderCart();
+  }
+}
+
 function renderCart() {
   // Get elements from the cart page
   const cartBody = document.getElementById("cart-body");
@@ -146,7 +182,9 @@ function renderCart() {
                         <td>
                             <button class="icon-btn" ${
                               canDecrease ? "" : "disabled"
-                            }><i class="fa-solid fa-minus"></i></button>
+                            } onclick="removeFromCart('${
+      item.id
+    }', 1)"><i class="fa-solid fa-minus"></i></button>
                             ${item.quantity}
                             <button class="icon-btn" ${
                               canIncrease ? "" : "disabled"
@@ -156,7 +194,11 @@ function renderCart() {
                         </td>
                         <td>
                             $${item.price.toFixed(2)}
-                            <button class="icon-btn"><i class="fa-solid fa-xmark"></i></button>
+                            <button class="icon-btn" onclick="removeFromCart('${
+                              item.id
+                            }', ${
+      item.quantity
+    })"><i class="fa-solid fa-xmark"></i></button>
                         </td>
     `;
     cartBody.appendChild(cartItem);
