@@ -64,20 +64,6 @@ function reserveItem(item) {
       JSON.stringify(currentItemQuantities)
     );
 
-    // Atualiza a quantidade exibida
-    document.getElementById(
-      `${item}-qty`
-    ).textContent = `Quantidade: ${currentItemQuantities[item]}`;
-
-    // Verifica se a quantidade chegou a zero para desabilitar o botão
-    if (currentItemQuantities[item] === 0) {
-      const button = document.getElementById(`${item}-btn`);
-      button.disabled = true;
-      button.textContent = "Indisponível";
-      button.style.backgroundColor = "red";
-      button.style.color = "white";
-    }
-
     // Adiciona o preço do item ao total do pedido
     currentCartTotal += ITEM_PRICES[item];
     sessionStorage.setItem("cartTotal", currentCartTotal.toFixed(2)); // Armazena o total no sessionStorage
@@ -98,15 +84,24 @@ function reserveItem(item) {
 
     sessionStorage.setItem("cart", JSON.stringify(currentCart));
 
-    // Pergunta ao usuário se deseja continuar reservando ou finalizar
-    const continuar = confirm(
-      `Você reservou um(a) ${item}. Deseja continuar reservando?`
-    );
+    // Atualiza a quantidade exibida
+    if (window.location.pathname.includes("reserva.html")) {
+      renderQuantities();
 
-    // Verifica a resposta do usuário
-    if (!continuar) {
-      // Se o usuário escolher finalizar, redireciona para a página de cadastro
-      window.location.href = "carrinho.html";
+      // Pergunta ao usuário se deseja continuar reservando ou finalizar
+      const continuar = confirm(
+        `Você reservou um(a) ${item}. Deseja continuar reservando?`
+      );
+
+      // Verifica a resposta do usuário
+      if (!continuar) {
+        // Se o usuário escolher finalizar, redireciona para a página de cadastro
+        window.location.href = "carrinho.html";
+      }
+    }
+
+    if (window.location.pathname.includes("carrinho.html")) {
+      renderCart();
     }
   } else {
     alert(`Desculpe, ${item} está indisponível.`);
@@ -139,14 +134,25 @@ function renderCart() {
 
   // If there are items in the cart, load each one onto the table
   currentCart.forEach((item) => {
-    const cartItem = document.createElement("tr");
+    // Check if item quantity can be increased/decreased
+    let canIncrease =
+      JSON.parse(sessionStorage.getItem("itemQuantities"))[item.id] > 0;
+    let canDecrease = item.quantity > 1;
+
+    let cartItem = document.createElement("tr");
     cartItem.innerHTML = `
       <td colspan="2">${item.name}</td>
                         <td>$${ITEM_PRICES[item.id].toFixed(2)}</td>
                         <td>
-                            <button class="icon-btn"><i class="fa-solid fa-minus"></i></button>
+                            <button class="icon-btn" ${
+                              canDecrease ? "" : "disabled"
+                            }><i class="fa-solid fa-minus"></i></button>
                             ${item.quantity}
-                            <button class="icon-btn"><i class="fa-solid fa-plus"></i></button>
+                            <button class="icon-btn" ${
+                              canIncrease ? "" : "disabled"
+                            } onclick="reserveItem('${
+      item.id
+    }')"><i class="fa-solid fa-plus"></i></button>
                         </td>
                         <td>
                             $${item.price.toFixed(2)}
@@ -168,6 +174,15 @@ function renderQuantities() {
     document.getElementById(
       `${item}-qty`
     ).textContent = `Quantidade: ${quantity}`;
+
+    // Verifica se a quantidade chegou a zero para desabilitar o botão
+    if (currentItemQuantities[item] === 0) {
+      const button = document.getElementById(`${item}-btn`);
+      button.disabled = true;
+      button.textContent = "Indisponível";
+      button.style.backgroundColor = "red";
+      button.style.color = "white";
+    }
   }
 }
 
