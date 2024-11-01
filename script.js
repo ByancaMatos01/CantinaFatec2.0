@@ -144,6 +144,21 @@ function removeFromCart(item, quantity) {
   }
 }
 
+function checkout() {
+  const checkoutName = document.getElementById("checkout-name");
+  const checkoutEmail = document.getElementById("checkout-email");
+
+  if (checkoutName.value == "" || checkoutEmail.value == "") {
+    alert("Por favor, inclua seu nome e e-mail para finalizar a reserva");
+  } else {
+    sessionStorage.setItem("cart", JSON.stringify(CART));
+    sessionStorage.setItem("cartTotal", CART_TOTAL);
+
+    alert("Reserva finalizada com sucesso.");
+    window.location.href = "index.html";
+  }
+}
+
 function renderCart() {
   // Get elements from the cart page
   const cartBody = document.getElementById("cart-body");
