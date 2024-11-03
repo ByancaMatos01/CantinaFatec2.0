@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sua Reserva</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="cart.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="image/favicon" type="image/x-icon">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <section id="Cart">
+        <!--Header-->
+
+        <nav>
+            <div class="logo">
+                <img src="image/logo.png">
+            </div>
+
+            <ul>
+                <li><a href="index.html#Home">Início</a></li>
+                <li><a href="index.html#About">Sobre</a></li>
+                <li><a href="index.html#Menu">Cardápio</a></li>
+                <li><a href="index.html#Review">Clientes</a></li>
+                <li><a href="reserva.html"> Reserva</a></li>
+            </ul>
+
+            <div class="icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <i class="fa-solid fa-heart"></i>
+                <a href="carrinho.html"><i class="fa-solid fa-cart-shopping"></i></a>
+            </div>
+
+        </nav>
+
+        <!--Cart-->
+
+        <div class="main">
+            <table class="cart-table">
+                <thead class="cart-header">
+                    <tr>
+                        <th colspan="2">Item</th>
+                        <th>Preço</th>
+                        <th>Quantidade</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody class="cart-body" id="cart-body">
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Order Summary -->
+
+        <div class="main">
+            <div class="summary">
+                <div>
+                    <strong id="cart-total"></strong>
+                </div>
+                <div>
+                    <span>Nome : <input type="text" placeholder="Nome" class="checkout-input" id="checkout-name"></span>
+                    <span>E-mail : <input type="text" placeholder="E-mail" class="checkout-input" id="checkout-email"> </span>
+                    <button class="checkout-btn" id="checkout-btn" onclick="checkout()">Reservar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
